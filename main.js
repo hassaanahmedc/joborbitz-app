@@ -34,3 +34,17 @@ dotsContainer.addEventListener('click', function (e) {
         activeDot(slide)
     }
 })
+
+
+// const slideRight = function () {
+//     if (currentSlide === maxSlides) currentSlide = 0;
+//     else currentSlide++;
+
+//     sliderInit(currentSlide)
+//     activeDot(currentSlide)
+// }
+
+// const sliderInterval = setInterval(() => {
+//     slideRight()
+
+// }, 3000);

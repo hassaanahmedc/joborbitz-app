@@ -9,6 +9,7 @@
 
 html {
     scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 
 ::selection {
@@ -25,16 +26,16 @@ html {
     cursor: pointer;
 }
 
-.app {
+.wrapper {
     max-width: 1368px;
     margin: auto;
+    height: 100%;
 }
 
 header {
     height: 100vh;
     min-height: 550px;
     max-height: 700px;
-    overflow: hidden;
     background-color: #566bfc;
 }
 
@@ -48,6 +49,28 @@ header {
 
 .logo>img {
     width: 200px;
+}
+
+.hamburger {
+    height: 30px;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    cursor: pointer;
+    display: none;
+}
+
+.line {
+    height: 5px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.line:nth-child(2) {
+    width: 60%;
 }
 
 .mainMenu {
@@ -82,17 +105,21 @@ header {
     display: flex;
     justify-content: center;
     padding: 0 2rem;
+    overflow-y: hidden;
+    height: calc(100% - 100px);
 }
 
 .heroLeft {
     flex: 2;
-    padding: 4rem 0;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .heroLeft h1 {
-    font-size: 10rem;
-    line-height: 8rem;
+    font-size: 12vw;
+    line-height: 10vw;
     font-weight: 900;
     color: white;
 }
@@ -109,42 +136,52 @@ header {
     margin-top: 1rem;
 }
 
+.searchForm label {
+    display: flex;
+    align-items: center;
+}
+
+.searchForm label img {
+    width: 15px;
+}
+
 .searchForm input {
     all: unset;
     flex: 1;
 }
 
 .searchForm select {
-    /* all: unset; */
     width: 120px;
     background-color: transparent;
     border: none;
     border-left: 1px solid grey;
     border-right: 1px solid grey;
     padding: 0 1rem;
-    /* appearance: initial; */
 }
 
 .heroRight {
     flex: 1;
     position: relative;
+    height: 100%;
 }
 
 .heroRight img {
     width: 120%;
     position: absolute;
-    left: -100px;
-    top: -70px;
+    left: -70px;
 }
 
 
-.features {
+/* features */
+.features .wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 400px;
     flex-wrap: wrap;
     gap: 2rem;
+    background-color: white;
+    padding: 2rem;
 }
 
 .feature {
@@ -170,7 +207,7 @@ header {
 }
 
 /* latest jobs */
-.container {
+.container .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -184,11 +221,13 @@ header {
 
 .container-heading {
     font-size: 3rem;
+    text-align: center;
     font-weight: 500;
 }
 
 .container-sub-heading {
     font-size: 1.5rem;
+    text-align: center;
     font-weight: 400;
     margin-bottom: 4rem;
 }
@@ -197,14 +236,15 @@ header {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: center;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     color: black;
 }
 
 .job {
     background-color: white;
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -250,19 +290,22 @@ header {
 
 
 /* Team */
+.team .wrapper {
+    background-color: white;
+}
 
 .team h2 {
     color: #566bfc;
 }
 
-.team .members {
+.members {
     width: 100%;
     max-width: 800px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    min-height: 300px;
     overflow: hidden;
 }
 
@@ -273,14 +316,13 @@ header {
     align-items: center;
     padding: 1.5rem;
     position: absolute;
-    /* border: 2px solid #566cfc36; */
     border-radius: 10px;
     transition: 1s;
 }
 
 .member img {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
 }
 
@@ -306,32 +348,37 @@ header {
     display: flex;
     justify-content: space-around;
     height: 30px;
-    width: 150px;
+    width: 200px;
     align-items: center;
+    margin-top: 2rem;
 }
 
 .dots__dot {
     all: unset;
-    height: 15px;
-    width: 15px;
+    height: 10px;
+    width: 30px;
+    border-radius: 20px;
     background-color: rgb(223, 223, 223);
-    border-radius: 50%;
     cursor: pointer;
 }
 
 .dots__dot--active {
-    background-color: rgb(148, 148, 148);
+    background-color: #566bfc;
 }
 
 
 /* mailing */
 .mailing {
+    background-color: #566bfc;
+}
+
+.mailing .wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 400px;
-    background-color: #566bfc;
+    padding: 2rem 0;
+    min-height: 400px;
 }
 
 .mailing h2 {
@@ -360,12 +407,13 @@ header {
 
 /* footer */
 
-.footer-top {
+.footer-top .wrapper {
     display: flex;
     padding: 2rem 2rem 7rem 2rem;
     flex-wrap: wrap;
     gap: 4rem;
-    justify-content: space-evenly;
+    /* justify-content: center; */
+    background-color: white;
 }
 
 .footer-top h2 {
@@ -387,8 +435,8 @@ header {
 
 .doubleMenu {
     display: flex;
-    gap: 4rem;
     flex: 1;
+    gap: 5rem;
     justify-content: space-evenly;
 }
 
@@ -408,4 +456,13 @@ header {
     padding: 1.5rem;
     color: white;
     background-color: #566bfc;
+}
+
+
+
+@media screen and (min-width: 1368px) {
+    .heroLeft h1 {
+        font-size: 10rem;
+        line-height: 8rem;
+    }
 }
