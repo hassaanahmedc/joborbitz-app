@@ -15,18 +15,19 @@ body {
 }
 
 .wrapper {
-    height: 500px;
+    min-height: 500px;
     width: 95vw;
     max-width: 900px;
     border-radius: 20px;
     box-shadow: 0 0 100px #566cfc3b;
     display: flex;
     overflow: hidden;
+    padding: 1rem;
 }
 
 .wrapper-left {
     flex: 1.5;
-    padding: 4rem;
+    padding: 0 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,10 +76,10 @@ body {
 
 .extra {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: .4rem;
     font-size: .8rem;
     padding: .5rem;
-    align-items: center;
 }
 
 .extra a {
@@ -100,13 +101,17 @@ body {
     cursor: pointer;
 }
 
-.signup {
+.login {
     font-size: .8rem;
     margin-top: 1rem;
 }
 
+.login a {
+    color: #566bfc;
+}
+
 .wrapper-right {
-    flex: 1;
+    flex: 1.5;
     background-color: #566bfc;
     display: flex;
     justify-content: center;
