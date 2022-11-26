@@ -52,6 +52,8 @@
     .circle:nth-child(1) {
         height: 60vw;
         width: 60vw;
+        max-height: 300px;
+        max-width: 300px;
         bottom: -6vh;
         left: -20vw;
         background: linear-gradient(135deg, rgba(0, 0, 255, 0), #d8ddff);
@@ -62,7 +64,8 @@
         right: -10vw;
         height: 45vw;
         width: 45vw;
+        max-height: 200px;
+        max-width: 200px;
         background: linear-gradient(45deg, rgb(0, 0, 211), #c9d0ff);
     }
-
 }
