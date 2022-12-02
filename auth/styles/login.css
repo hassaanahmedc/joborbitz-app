@@ -130,4 +130,8 @@ body {
     .input-container {
         width: 100%;
     }
+
+    .wrapper-left {
+        padding: 4rem 1rem;
+    }
 }

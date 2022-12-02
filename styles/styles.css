@@ -83,6 +83,10 @@ header {
     padding-bottom: .5rem;
 }
 
+.mobile-menu-wrapper {
+    display: none;
+}
+
 .navLinks {
     padding: 0 10rem;
     display: flex;

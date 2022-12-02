@@ -1,3 +1,5 @@
+// Slider
+
 const slider = document.querySelector('.members')
 const slides = document.querySelectorAll('.member')
 let currentSlide = 0
@@ -48,3 +50,21 @@ dotsContainer.addEventListener('click', function (e) {
 //     slideRight()
 
 // }, 3000);
+
+
+
+// Mobile Menu
+
+const hamburger = document.querySelector('.hamburger')
+const closeMenu = document.querySelector('.close-menu')
+const mobileMenuWrapper = document.querySelector('.mobile-menu-wrapper')
+const mobileMenu = document.querySelector('.mobile-menu')
+
+hamburger.addEventListener('click', () => {
+    mobileMenu.classList.remove('menu-closed')
+    mobileMenuWrapper.classList.remove('menu-hide')
+})
+closeMenu.addEventListener('click', () => {
+    mobileMenu.classList.add('menu-closed')
+    mobileMenuWrapper.classList.add('menu-hide')
+})
