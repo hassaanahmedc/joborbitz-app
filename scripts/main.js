@@ -1,3 +1,8 @@
+// stop spinner
+const spinner = document.querySelector('.spinner')
+window.addEventListener('load', () => spinner.style.display = 'none')
+
+
 // Slider
 
 const slider = document.querySelector('.members')
@@ -38,18 +43,18 @@ dotsContainer.addEventListener('click', function (e) {
 })
 
 
-// const slideRight = function () {
-//     if (currentSlide === maxSlides) currentSlide = 0;
-//     else currentSlide++;
+const slideRight = function () {
+    if (currentSlide === maxSlides) currentSlide = 0;
+    else currentSlide++;
 
-//     sliderInit(currentSlide)
-//     activeDot(currentSlide)
-// }
+    sliderInit(currentSlide)
+    activeDot(currentSlide)
+}
 
-// const sliderInterval = setInterval(() => {
-//     slideRight()
+const sliderInterval = setInterval(() => {
+    slideRight()
 
-// }, 3000);
+}, 3000);
 
 
 
@@ -68,3 +73,17 @@ closeMenu.addEventListener('click', () => {
     mobileMenu.classList.add('menu-closed')
     mobileMenuWrapper.classList.add('menu-hide')
 })
+
+
+// sticky nav
+
+const heroSection = document.querySelector('.hero')
+const navbar = document.querySelector('.topNav')
+
+const navObserver = new IntersectionObserver((e) => {
+    e.forEach(entry => !entry.isIntersecting ? navbar.classList.add('stickyNav') : navbar.classList.remove('stickyNav'))
+}, {
+    root: null,
+    threshold: 0.1
+})
+navObserver.observe(heroSection)

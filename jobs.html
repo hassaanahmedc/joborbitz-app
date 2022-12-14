@@ -8,9 +8,8 @@
     <title>JobOrbitz | Available Jobs</title>
     <!-- style sheets -->
     <link rel="stylesheet" href="/styles/jobs.css">
-
     <!-- javascript -->
-    <script src="./scripts/main.js" defer></script>
+    <script src="/scripts/jobsPage.js" defer></script>
 </head>
 
 <body>
@@ -518,6 +517,21 @@
             </div>
         </footer>
     </div>
+
+    <!-- script -->
+    <script>
+        // sticky nav
+        const heroSection = document.querySelector('.hero')
+        const navbar = document.querySelector('.topNav')
+
+        const observer = new IntersectionObserver((e) => {
+            e.forEach(entry => !entry.isIntersecting ? navbar.classList.add('stickyNav') : navbar.classList.remove('stickyNav'))
+        }, {
+            root: null,
+            threshold: 0.1
+        })
+        observer.observe(heroSection)
+    </script>
 </body>
 
 </html>

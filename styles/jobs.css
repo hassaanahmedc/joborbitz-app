@@ -50,6 +50,15 @@ header {
     align-items: center;
 }
 
+.stickyNav {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    background-color: #566cfc;
+    height: 70px;
+    transition: .5s;
+}
+
 .logo>img {
     width: 200px;
 }
@@ -217,6 +226,7 @@ header {
     box-shadow: 0 0 10px #566cfc4d;
     border-radius: 10px;
     overflow: hidden;
+    transition: .5s;
 }
 
 .accordianHeader {
@@ -226,6 +236,7 @@ header {
     align-items: center;
     overflow: hidden;
     cursor: pointer;
+    transition: .5s;
 }
 
 .activeAccordian .accordianHeader {
@@ -250,15 +261,14 @@ header {
 }
 
 .accordianMenu {
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
     display: none;
 }
 
 .activeAccordian .accordianMenu {
+    padding: 2rem 1rem;
     display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .accordianMenu li {
