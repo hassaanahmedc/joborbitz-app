@@ -1,0 +1,126 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: 'Poppins';
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.formWrapper {
+    height: 400px;
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(100, 100, 255, 0.473);
+}
+
+.fw-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fw-heading {
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+.fw-subhead {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: #3579ef;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#email,
+#password {
+    height: 2.5rem;
+    width: 300px;
+    padding: 0 4rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 5px rgba(128, 128, 128, 0.5);
+    font-size: 1.1rem;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.login-form label {
+    position: relative;
+}
+
+.login-form label .fa-solid {
+    position: absolute;
+    top: -18px;
+    left: 1rem;
+    font-size: 1.2rem;
+    background: linear-gradient(to bottom, #2b7ce9, #6643ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.show-password {
+    position: relative;
+    height: 0px;
+}
+
+.eye-icon {
+    position: absolute;
+    top: -28px;
+    right: -100px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#show-pass {
+    display: none;
+}
+
+.remember-me {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.login {
+    width: 60%;
+    border: none;
+    outline: none;
+    background: linear-gradient(to bottom, #2b7ce9, #6643ff);
+    color: white;
+    padding: .5rem 1rem;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    border-radius: 30px;
+}
+
+.fa-eye-slash {
+    display: none;
+}
