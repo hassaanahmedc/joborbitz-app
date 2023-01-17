@@ -1,11 +1,14 @@
 <?php
-require_once '../dbconn.php';
-try {
+require_once '/xampp/htdocs/joborbitz-app/Login-/dbConn/dbconn.php';
+try{
     $pdo = new PDO($attr, $user, $pass, $opts);
-} catch (PDOException $e) {
+}
+catch (PDOException $e){
     throw new PDOException($e->getMessage(), (int)$e->getCode());
 }
+
 if (isset($_FILES['image'])&&
+    isset($_POST['title']) &&
     isset($_POST['organization']) &&
     isset($_POST['description']) &&
     isset($_POST['province']) &&
@@ -17,6 +20,7 @@ if (isset($_FILES['image'])&&
     // $description = mysql_entities_quote($pdo,$_POST['description']);
     // $province = mysql_entities_quote($pdo,$_POST['province']);
     // $qualification = mysql_entities_quote($pdo,$_POST['qualification']);
+    $title = $_POST['title'];
     $organization = $_POST['organization'];
     $description = $_POST['description'];
     $province = $_POST['province'];
@@ -30,7 +34,8 @@ if (isset($_FILES['image'])&&
 
 
 
-    $query = $pdo->prepare("INSERT INTO jobs (organization, image, description, province, requirements, last_date, posted_date) VALUES(?,?,?,?,?,?,?)");
+    $query = $pdo->prepare("INSERT INTO jobs (title, organization, image, description, province, requirements, last_date, posted_date) VALUES(?,?,?,?,?,?,?,?)");
+    $job_title = filter_var($title, FILTER_SANITIZE_STRING); 
     $org = filter_var($organization, FILTER_SANITIZE_STRING); 
     $desc = filter_var($description, FILTER_SANITIZE_STRING); 
     $pro = filter_var($province, FILTER_SANITIZE_STRING);
@@ -38,15 +43,16 @@ if (isset($_FILES['image'])&&
     $l_d = filter_var($last_date, FILTER_SANITIZE_NUMBER_INT); 
     $p_d = filter_var($posted_date, FILTER_SANITIZE_NUMBER_INT); 
     // $i_n = filter_var($name, FILTER_SANITIZE_STRING); 
-    $query->bindParam(1, $org, PDO::PARAM_STR);
-    $query->bindParam(2, $name, PDO::PARAM_STR);
-    $query->bindParam(3, $desc, PDO::PARAM_STR);
-    $query->bindParam(4, $pro, PDO::PARAM_STR);
-    $query->bindParam(5, $qua, PDO::PARAM_STR);
-    $query->bindParam(6, $l_d, PDO::PARAM_INT);
-    $query->bindParam(7, $p_d, PDO::PARAM_STR);
+    $query->bindParam(1, $title, PDO::PARAM_STR);
+    $query->bindParam(2, $org, PDO::PARAM_STR);
+    $query->bindParam(3, $name, PDO::PARAM_STR);
+    $query->bindParam(4, $desc, PDO::PARAM_STR);
+    $query->bindParam(5, $pro, PDO::PARAM_STR);
+    $query->bindParam(6, $qua, PDO::PARAM_STR);
+    $query->bindParam(7, $l_d, PDO::PARAM_INT);
+    $query->bindParam(8, $p_d, PDO::PARAM_STR);
 
-    $query->execute([$org, $name, $desc, $pro, $qua, $l_d, $p_d]);
+    $query->execute([$title, $org, $name, $desc, $pro, $qua, $l_d, $p_d]);
 }
 ?>
         <html>
@@ -58,6 +64,9 @@ if (isset($_FILES['image'])&&
                 <div class="job-container input-container">
                     <form action="add_job.php" method="post" enctype="multipart/form-data">
                         <pre>
+                            <label for="title">Job Titlez</label>
+                            <input type="text" id="title" name="title" required>
+
                             <label for="organization">Organization</label>
                             <input type="text" id="organization" name="organization" required>
 
@@ -83,7 +92,7 @@ if (isset($_FILES['image'])&&
                             <input type="file" id="image" name="image" accept="image/*">
                             
                             <input type="submit" id="submit" value="Add Job" class="login" name="submit">
-                            <button onClick="location.href='../welcome.php'">Show Results</button>
+                            <button onClick="location.href='index.php'">Show Results</button>
                         </pre>
                     </form>
                 </div>

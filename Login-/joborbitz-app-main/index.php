@@ -1,5 +1,5 @@
 <?php 
-    require_once'../dbConn/dbconn.php'; 
+    require_once '../dbConn/dbconn.php'; 
     try {
         $pdo = new PDO($attr, $user, $pass, $opts);
     } catch (PDOException $e) {
@@ -91,18 +91,11 @@
                     <div class="circle"></div>
                     <div class="heroLeft">
                         <h1>GET A JOB THAT YOU DESERVE !</h1>
-                        <form action="tobeadded" class="searchForm">
+                        <form action="../joborbitz-app-main/search.php" class="searchForm" method='get'>
                             <label for="searchInput">
                                 <img src="images/search.png" alt="">
                             </label>
                             <input type="search" name="searchInput" placeholder="Search Jobs!" id="searchInput">
-                            <select name="Province" id="Province" title="Province">
-                                <option value="Punjab">Punjab</option>
-                                <option value="Sindh">Sindh</option>
-                                <option value="Balochistan">Balochistan</option>
-                                <option value="KPK">KPK</option>
-                                <option value="AJK">AJK</option>
-                            </select>
                             <button type="submit" class="btn">Search</button>
                         </form>
                     </div>

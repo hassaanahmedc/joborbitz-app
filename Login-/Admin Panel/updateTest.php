@@ -8,7 +8,7 @@
 </head>
 <body>    
 <?php 
-require_once 'dbconn.php';
+require_once '../dbConn/dbconn.php';
 
 try {
   $pdo = new PDO($attr, $user, $pass, $opts);

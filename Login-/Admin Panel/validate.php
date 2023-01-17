@@ -1,10 +1,10 @@
 <?php
 session_start();
 if(isset($_SESSION['loggedin'])){
-    header("Location: welcome.php");
+    header("Location: index.php");
 }else{
 
-    require_once 'dbconn.php';
+    require_once '../dbConn/dbconn.php';
     try {
     $pdo = new PDO($attr, $user, $pass, $opts);
 } catch (PDOException $e) {
@@ -26,7 +26,7 @@ $showError = false;
                     session_start();
                     $Login = true;
                     $_SESSION['loggedin'] = true;
-                    header("Location: welcome.php");
+                    header("Location: index.php");
                 }
                 else {
                     $showError ="Invalid Credentials";
