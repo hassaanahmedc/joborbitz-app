@@ -96,7 +96,7 @@
                                 <img src="images/search.png" alt="">
                             </label>
                             <input type="search" name="searchInput" placeholder="Search Jobs!" id="searchInput">
-                            <button type="submit" class="btn">Search</button>
+                            <button type="submit" name="submit" class="btn">Search</button>
                         </form>
                     </div>
                     <div class="heroRight">
@@ -194,7 +194,7 @@
                         <div class="member">
                             <img src="images/hassaan.png" alt="Muhammad Hassaan">
                             <div class="member-details">
-                                <h1 class="name">Md. Hassaan</h1>
+                                <h1 class="name">Muhammad Hassaan</h1>
                                 <h3 class="role">Back End Developer</h3>
                                 <p class="description">This man is a jack of all trades! Not only he is an awesome
                                     back-end

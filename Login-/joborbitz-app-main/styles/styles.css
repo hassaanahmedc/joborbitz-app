@@ -14,10 +14,10 @@ html {
     /* scrollbar-width: none; */
 }
 
-::selection {
+/* ::selection {
     background-color: none;
     color: none;
-}
+} */
 
 .btn {
     all: unset;
