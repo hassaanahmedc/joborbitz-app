@@ -91,11 +91,11 @@
                     <div class="circle"></div>
                     <div class="heroLeft">
                         <h1>GET A JOB THAT YOU DESERVE !</h1>
-                        <form action="../joborbitz-app-main/search.php" class="searchForm" method='get'>
+                        <form action="../joborbitz-app-main/jobs.php" class="searchForm" method='get'>
                             <label for="searchInput">
                                 <img src="images/search.png" alt="">
                             </label>
-                            <input type="search" name="searchInput" placeholder="Search Jobs!" id="searchInput">
+                            <input type="search" name="searchInput" placeholder="Search Jobs!" id="searchInput" required>
                             <button type="submit" name="submit" class="btn">Search</button>
                         </form>
                     </div>
@@ -143,11 +143,12 @@
                     <h3 class="container-sub-heading">We post jobs daily to keep you updated!</h3>
                     <div class="jobs-list">
         <?php
-            $query = "SELECT * FROM `jobs` LIMIT 10";
+            $query = "SELECT * FROM `jobs` ORDER BY posted_date DESC LIMIT 10 ";
             $result = $pdo->query($query);
             while ($row = $result->fetch(PDO::FETCH_BOTH))
     {
       $sno = $row['id'];
+      $title = $row['title'];
       $organization =  $row['organization'];
       $province = $row['province'] ;
       $last_date = $row['last_date'];
@@ -155,7 +156,7 @@
       echo <<<_END
                         <div class="job">
                             <div class="job-details">
-                                <h2> $organization - Backend Developer</h2>
+                                <h2> $organization - $title</h2>
                                 <div class="l-d-v">
                                     <p><img src="images/location.png" alt="icon"> <span>$province</span></p>
                                     <p><img src="images/date.png" alt="icon"> <span>$last_date</span></p>
