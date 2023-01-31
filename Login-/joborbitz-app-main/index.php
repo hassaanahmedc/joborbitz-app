@@ -1,10 +1,39 @@
-<?php 
-    require_once '../dbConn/dbconn.php'; 
-    try {
-        $pdo = new PDO($attr, $user, $pass, $opts);
-    } catch (PDOException $e) {
-        throw new PDOException($e->getMessage(), (int)$e->getCode());
+<?php
+//Connecting Database 
+require_once '../dbConn/dbconn.php';
+try {
+    $pdo = new PDO($attr, $user, $pass, $opts);
+} catch (PDOException $e) {
+    throw new PDOException($e->getMessage(), (int)$e->getCode());
+}
+
+//Creating function to retreive 10 latest jobs!
+function latest_jobs($pdo)
+{
+    $query = "SELECT * FROM `jobs` ORDER BY posted_date DESC LIMIT 10 ";
+    $result = $pdo->query($query);
+    while ($row = $result->fetch(PDO::FETCH_BOTH)) {
+        $sno = $row['id'];
+        $title = $row['title'];
+        $organization =  $row['organization'];
+        $province = $row['province'];
+        $last_date = $row['last_date'];
+
+        echo <<<_END
+                <div class="job">
+                    <div class="job-details">
+                        <h2> $organization - $title</h2>
+                        <div class="l-d-v">
+                            <p><img src="images/location.png" alt="icon"> <span>$province</span></p>
+                            <p><img src="images/date.png" alt="icon"> <span>$last_date</span></p>
+                            <p><img src="images/user.png" alt="icon"> <span>03</span></p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn jobBtn">View More!</a>
+                </div>
+                _END;
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -135,44 +164,19 @@
 
 
             <!-- latest jobs -->
-
-                        <!-- latest jobs -->
-                        <section class="latest-jobs container">
+            <section class="latest-jobs container">
                 <div class="wrapper">
                     <h2 class="container-heading">Latest Jobs</h2>
                     <h3 class="container-sub-heading">We post jobs daily to keep you updated!</h3>
                     <div class="jobs-list">
-        <?php
-            $query = "SELECT * FROM `jobs` ORDER BY posted_date DESC LIMIT 10 ";
-            $result = $pdo->query($query);
-            while ($row = $result->fetch(PDO::FETCH_BOTH))
-    {
-      $sno = $row['id'];
-      $title = $row['title'];
-      $organization =  $row['organization'];
-      $province = $row['province'] ;
-      $last_date = $row['last_date'];
-      
-      echo <<<_END
-                        <div class="job">
-                            <div class="job-details">
-                                <h2> $organization - $title</h2>
-                                <div class="l-d-v">
-                                    <p><img src="images/location.png" alt="icon"> <span>$province</span></p>
-                                    <p><img src="images/date.png" alt="icon"> <span>$last_date</span></p>
-                                    <p><img src="images/user.png" alt="icon"> <span>03</span></p>
-                                </div>
-                            </div>
-                            <a href="#" class="btn jobBtn">View More!</a>
-                        </div>
-      _END;
-    }
-    ?>
-    </div>
+
+                    // Calling PHP function to show latest jobs
+                    <?php latest_jobs($pdo) ?>
+
+                    </div>
                     <a href="#" class="btn jobsBtn">See All Jobs!</a>
                 </div>
             </section>
-
 
             <!-- Team -->
             <section class="team container" id="team">
