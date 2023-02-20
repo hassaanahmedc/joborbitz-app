@@ -1,131 +1,8 @@
 <?php
-//Connecting Database 
-require_once '../dbConn/dbconn.php';
-try {
-    $pdo = new PDO($attr, $user, $pass, $opts);
-} catch (PDOException $e) {
-    throw new PDOException($e->getMessage(), (int)$e->getCode());
-}
-
-//Function t0 show search results
-function search_reults($pdo)
-{
-    if (isset($_GET['submit']) && isset($_GET['searchInput'])) {
-
-        $searchinput = $_GET['searchInput'];
-        $validatedinput = sanitize_search_input($searchinput);
-
-        $query = $pdo->prepare("SELECT * FROM jobs WHERE MATCH(title) AGAINST(:search)");
-        $query->execute(['search' => $validatedinput]);
-
-        $title = 'No title found';
-        $organization = 'No organization found';
-        $province = 'No province found';
-        $description = 'No description found';
-        $qualification = 'No qualification found';
-
-
-        while ($row = $query->fetch(PDO::FETCH_BOTH)) {
-            $sno = $row['id'];
-            $title = $row['title'];
-            $organization =  $row['organization'];
-            $province = $row['province'];
-            $description = $row['description'];
-            $qualification = $row['requirements'];
-            $posted_date = new DateTime($row['posted_date']);
-            $last_date = new DateTime($row['last_date']);
-            $formatted_posted_date = $posted_date->format('d-m-Y');
-            $formatted_last_date = $last_date->format('d-m-Y');
-
-            echo <<<_END
-                    <div class="jobItem">
-                            <div class="jobItemLeft">
-                                <h2>$title</h2>
-                                <p>$organization</p>
-                                <div class="dates">
-                                    <p><img src="images/posted-date.png" alt="icon"> <span>Posted on: $formatted_posted_date</span></p>
-                                    <p class="lastDate"><img src="images/date.png" alt="icon"> <span>Last Date:
-                                           $formatted_last_date</span></p>
-                                </div>
-                                <div class="tags">
-                                    <span class="tag">$province</span>
-                                    <span class="tag">Private</span>
-                                    <span class="tag">$qualification</span>
-                                </div>
-                            </div>
-                            <div class="jobItemRight">
-                                <a href="#" class="btn">
-                                    <p>View Job</p>
-                                    <img src="images/rarr.png" alt="icon" height="20">
-                                </a>
-                                <a href="#" class="greenBtn">
-                                    <img src="images/download.png" alt="icon">
-                                    <p>Download Advertisement</p>
-                                </a>
-                            </div>
-                        </div>
-                    _END;
-        }
-    }
-}
-
-//Creating function to retreive all jobs!
-function show_all_jobs($pdo)
-{
-    $query = "SELECT * FROM `jobs` ORDER BY posted_date DESC";
-    $result = $pdo->query($query);
-    while ($row = $result->fetch(PDO::FETCH_BOTH)) {
-        $sno = $row['id'];
-        $title = $row['title'];
-        $organization =  $row['organization'];
-        $province = $row['province'];
-        $description = $row['description'];
-        $qualification = $row['requirements'];
-        $posted_date = new DateTime($row['posted_date']);
-        $last_date = new DateTime($row['last_date']);
-        $formatted_posted_date = $posted_date->format('d-m-Y');
-        $formatted_last_date = $last_date->format('d-m-Y');
-
-        //Creating JobItems divs depending om searcdh results
-        echo <<<_END
-                        <div class="jobItem">
-                            <div class="jobItemLeft">
-                                <h2>$title</h2>
-                                <p>$organization</p>
-                                <div class="dates">
-                                    <p><img src="images/posted-date.png" alt="icon"> <span>Posted on: $formatted_posted_date</span></p>
-                                    <p class="lastDate"><img src="images/date.png" alt="icon"> <span>Last Date: $formatted_last_date</span></p>
-                                </div>
-                                <div class="tags">
-                                    <span class="tag">$province</span>
-                                    <span class="tag">Private</span>
-                                    <span class="tag">$qualification</span>
-                                </div>
-                            </div>
-                            <div class="jobItemRight">
-                                <a href="#" class="btn">
-                                    <p>View Job</p>
-                                    <img src="images/rarr.png" alt="icon" height="20">
-                                </a>
-                                <a href="#" class="greenBtn">
-                                    <img src="images/download.png" alt="icon">
-                                    <p>Download Advertisement</p>
-                                </a>
-                            </div>
-                        </div>
-                _END;
-    }
-}
-
-//function to sanitize search input 
-function sanitize_search_input($search)
-{
-    $result = trim($search);
-    $result = strip_tags($result);
-    return $result;
-}
-
+//Adding Funtions file 
+require_once 'functions.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -213,19 +90,19 @@ function sanitize_search_input($search)
                             <input type="search" name="searchInput" placeholder="Search Jobs!" id="searchInput">
                             <button type="submit" name="submit" class="btn">Search</button>
                         </form>
-                        <select name="location">
+                        <select class="province" name="province">
                             <option value="Punjab">Punjab</option>
                             <option value="Sindh">Sindh</option>
-                            <option value="Balochistan">Balochistan</option>
                             <option value="KPK">KPK</option>
+                            <option value="Balouchistan">Balouchistan</option>
                             <option value="AJK">AJK</option>
                         </select>
-                        <select name="education">
+                        <select class="education" name="education">
                             <option value="Matriculation">Matriculation</option>
                             <option value="Intermediate">Intermediate</option>
                             <option value="Bachelors">Bachelors</option>
                         </select>
-                        <select name="sector">
+                        <select class="sector" name="sector">
                             <option value="Government">Government</option>
                             <option value="Private">Private</option>
                             <option value="Semi-Government">Semi-Government</option>
@@ -310,8 +187,7 @@ function sanitize_search_input($search)
                     </div>
                 </div>
                 <div class="jobsSectionRight">
-                    <?php 
-
+                    <?php
                     //showing search results if we are getting any value from search input 
                     if (!isset($_GET['submit']) && !isset($_GET['searchInput'])) {
                         show_all_jobs($pdo);
@@ -319,7 +195,6 @@ function sanitize_search_input($search)
                         search_reults($pdo);
                     }
                     ?>
-
                 </div>
             </div>
             <div class="loadJobsBtn">
@@ -413,13 +288,26 @@ function sanitize_search_input($search)
         const navbar = document.querySelector('.topNav')
 
         const observer = new IntersectionObserver((e) => {
-            e.forEach(entry => !entry.isIntersecting ? navbar.classList.add('stickyNav') : navbar.classList.remove('stickyNav'))
+            e.forEach(entry => !entry.isIntersecting ? navbar.classList.add('stickyNav') : navbar.classList.remove(
+                'stickyNav'))
         }, {
             root: null,
             threshold: 0.1
         })
         observer.observe(heroSection)
+
+        //script for getting filter values
+        var select = document.getElementById("location");
+        select.addEventListener("change", function() {
+            var selectedValue = select.options[select.selectedIndex].value;
+            if (selectedValue === "") {
+                window.location.href = "jobs.php";
+            } else {
+                window.location.href = "jobs.php?location=" + selectedValue;
+            }
+        });
     </script>
+
 </body>
 
 </html>

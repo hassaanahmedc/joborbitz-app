@@ -1,40 +1,8 @@
 <?php
-//Connecting Database 
-require_once '../dbConn/dbconn.php';
-try {
-    $pdo = new PDO($attr, $user, $pass, $opts);
-} catch (PDOException $e) {
-    throw new PDOException($e->getMessage(), (int)$e->getCode());
-}
-
-//Creating function to retreive 10 latest jobs!
-function latest_jobs($pdo)
-{
-    $query = "SELECT * FROM `jobs` ORDER BY posted_date DESC LIMIT 10 ";
-    $result = $pdo->query($query);
-    while ($row = $result->fetch(PDO::FETCH_BOTH)) {
-        $sno = $row['id'];
-        $title = $row['title'];
-        $organization =  $row['organization'];
-        $province = $row['province'];
-        $last_date = $row['last_date'];
-
-        echo <<<_END
-                <div class="job">
-                    <div class="job-details">
-                        <h2> $organization - $title</h2>
-                        <div class="l-d-v">
-                            <p><img src="images/location.png" alt="icon"> <span>$province</span></p>
-                            <p><img src="images/date.png" alt="icon"> <span>$last_date</span></p>
-                            <p><img src="images/user.png" alt="icon"> <span>03</span></p>
-                        </div>
-                    </div>
-                    <a href="#" class="btn jobBtn">View More!</a>
-                </div>
-                _END;
-    }
-}
+//Adding Funtions file 
+require_once 'functions.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -170,9 +138,8 @@ function latest_jobs($pdo)
                     <h3 class="container-sub-heading">We post jobs daily to keep you updated!</h3>
                     <div class="jobs-list">
 
-                    // Calling PHP function to show latest jobs
-                    <?php latest_jobs($pdo) ?>
-
+                    <?php index_page_jobs($pdo) // Calling PHP function to show latest jobs ?>
+                    
                     </div>
                     <a href="#" class="btn jobsBtn">See All Jobs!</a>
                 </div>
